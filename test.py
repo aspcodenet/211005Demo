@@ -1,7 +1,7 @@
 
 class Konto:
-    def __init__(self):
-        self.kontonr = ""
+    def __init__(self, kontonummer):
+        self.kontonr = kontonummer
         self.saldo = 0
         self.pinkod = ""
 
@@ -11,7 +11,6 @@ class Konto:
         self.saldo = self.saldo - belopp
         return True
     
-
 
 def findKonto(lista, kontonr):
     for k in lista:
@@ -57,8 +56,7 @@ while True:
     if sel == "1":
         knr = input("Ange kontonummer:")
         pin = input("Ange pinkod:")
-        k = Konto()
-        k.kontonr = knr
+        k = Konto(knr)
         k.pinkod = pin
         listaMedKonton.append(k)
     if sel == "2":
