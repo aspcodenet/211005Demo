@@ -5,12 +5,55 @@ class Konto:
         self.saldo = 0
         self.pinkod = ""
 
+    def Withdraw(self,belopp):
+        if  belopp > self.saldo:
+            return False
+        self.saldo = self.saldo - belopp
+        return True
+    
+
+
+def findKonto(lista, kontonr):
+    for k in lista:
+        if(k.kontonr == kontonr):
+            return k
+    return None
+
+
+def showKontoMeny(konto):
+    while True:
+        print(f"*** {konto.kontonr} *** ")
+        print("1. Ta ut")
+        print("4. Logga ut")
+        sel = input("Selection:")
+        if sel == "4":
+            break
+        if sel == "1":
+            belopp = int(input("Ange belopp att ta ut:"))
+            if konto.Withdraw(belopp) == True:
+                print("Uttaget klart")
+            else:
+                print("Belopp ej tillåtet")
+
+
 
 listaMedKonton = []
+
+
+
 while True:
     print("1. Skapa konto")
     print("2. Visa alla konton")
+    print("3. Login")
     sel = input("Selection:")
+    if sel == "3":
+        knr = input("Ange kontonummer:")
+        valtKonto = findKonto(listaMedKonton, knr)
+        if valtKonto == None:
+            print("Ogiltigt konto")
+        else:
+            showKontoMeny(valtKonto)
+
     if sel == "1":
         knr = input("Ange kontonummer:")
         pin = input("Ange pinkod:")
